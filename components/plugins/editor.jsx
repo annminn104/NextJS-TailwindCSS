@@ -41,7 +41,7 @@ export const getContentFragment = (index, text, obj, type) => {
       );
     case "image":
       return (
-        <div className="flex justify-center">
+        <div className="mb-8 flex justify-center">
           <img key={index} alt={obj.title} height={obj.height} width={obj.width} src={obj.src} />
         </div>
       );

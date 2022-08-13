@@ -1,6 +1,7 @@
 import React from "react";
 
-const CommentsForm = () => {
+const CommentsForm = ({slug}) => {
+  
   return <React.Fragment>CommentsForm</React.Fragment>;
 };
 

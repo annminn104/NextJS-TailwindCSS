@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import moment from "moment";
 
-import { getContentFragment } from "../../services/editor.service";
+import { getContentFragment } from "../plugins/editor";
 
 const PostDetail = ({ post }) => {
   return (
