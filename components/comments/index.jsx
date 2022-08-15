@@ -1,11 +1,12 @@
 import React from "react";
-import { useRouter } from "next/router";
+import { useFacebook } from "../../hooks/useFacebook";
 
-const Comments = () => {
-  const router = useRouter();
+const Comments = ({ width, href, numPosts }) => {
+  useFacebook({ addTrack: true });
+
   return (
     <React.Fragment>
-      <div className="fb-comments" data-href={`https://blog-minh.vercel.app${router.asPath}`} data-width="100%" data-numposts="5"></div>
+      <div className="fb-comments" data-href={href} data-numposts={numPosts} data-width={width}></div>
     </React.Fragment>
   );
 };

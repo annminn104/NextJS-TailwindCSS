@@ -1,16 +1,22 @@
 import React from "react";
+import Head from "next/head";
 
 import "tailwindcss/tailwind.css";
+import "prismjs/themes/prism-tomorrow.css";
+import "react-multi-carousel/lib/styles.css";
 import "../styles/index.scss";
-import Script from "next/script";
 
 import { Layout } from "../components/layout";
+import { useFacebook } from "../hooks/useFacebook";
 
 function MyApp({ Component, pageProps }) {
+  useFacebook({ addTrack: false });
   return (
     <>
-      <div id="fb-root"></div>
-      <Script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0&appId=1880759465463765&autoLogAppEvents=1" nonce="Jj2upiOi"></Script>
+      <Head>
+        <title>Test Blog</title>
+        <link rel="icon" href="favicon.ico"></link>
+      </Head>
       <Layout>
         <Component {...pageProps} />
       </Layout>
