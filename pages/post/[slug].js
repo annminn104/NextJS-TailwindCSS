@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-
-import { getPosts, getPostDetails } from "../../services/graphql.service";
+import { NextSeo } from "next-seo";
 
 import { PostDetail } from "../../components/post-detail";
 import { Author } from "../../components/author";
@@ -10,12 +9,16 @@ import { LikeShare } from "../../components/like-share";
 import { Categories } from "../../components/categories";
 import { PostWidget } from "../../components/post-widget";
 import { Loader } from "../../components/loader";
-import { useFacebook } from "../../hooks/useFacebook";
+
+import { getPosts, getPostDetails } from "../../services/graphql.service";
+import { initFacebookSDK } from "../../services/facebookSDK.service";
 
 const PostDetails = ({ post }) => {
   const router = useRouter();
 
-  useFacebook({ addTrack: false });
+  useEffect(() => {
+    initFacebookSDK();
+  });
 
   if (router.isFallback) {
     return <Loader />;
@@ -23,13 +26,14 @@ const PostDetails = ({ post }) => {
 
   return (
     <React.Fragment>
+      <NextSeo title={`Post ${post ? post?.title : ""}`} />
       <div className="container mx-auto px-4 lg:px-10 mb-4 lg:mb-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-8">
           <div className="col-span-1 lg:col-span-8">
             <PostDetail post={post} />
             <Author author={post?.author} />
             {post && <LikeShare slug={post?.slug} />}
-            <Comments href={`https://blog-minh.vercel.app/post/${post?.slug}`} numPosts={5} width="100%" />
+            {post && <Comments href={`https://blog-minh.vercel.app/post/${post?.slug}`} numPosts={5} width="100%" />}
           </div>
           <div className="col-span-1 lg:col-span-4">
             <div className="lg:sticky relative top-8">

@@ -126,6 +126,9 @@ export const getCategoryPost = async (slug) => {
         edges {
           cursor
           node {
+            categories {
+              name
+            }
             author {
               bio
               name
