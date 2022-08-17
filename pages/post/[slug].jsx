@@ -10,7 +10,7 @@ import { Categories } from "../../components/categories";
 import { PostWidget } from "../../components/post-widget";
 import { Loader } from "../../components/loader";
 
-import { getPosts, getPostDetails } from "../../services/graphql.service";
+import { getPostDetails } from "../../services/graphql.service";
 import { initFacebookSDK } from "../../services/facebookSDK.service";
 
 const PostDetails = ({ post }) => {
