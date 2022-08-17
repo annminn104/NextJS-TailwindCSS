@@ -36,7 +36,7 @@ const PostDetails = ({ post }) => {
             {post && <Comments href={`https://blog-minh.vercel.app/post/${post?.slug}`} numPosts={5} width="100%" />}
           </div>
           <div className="col-span-1 lg:col-span-4">
-            <div className="lg:sticky relative top-8">
+            <div className="lg:sticky relative lg:top-24">
               <PostWidget slug={post?.slug} categories={post?.categories.map((category) => category.slug)} />
               <Categories />
             </div>
@@ -51,11 +51,9 @@ export default PostDetails;
 
 export async function getServerSideProps({ params }) {
   const data = await getPostDetails(params.slug);
-  const posts = await getPosts();
   return {
     props: {
       post: data,
-      paths: posts.map(({ node: { slug } }) => ({ params: { slug } })),
     },
   };
 }
@@ -72,7 +70,7 @@ export async function getServerSideProps({ params }) {
 // export async function getStaticPaths() {
 //   const posts = await getPosts();
 //   return {
-//     paths: posts.map(({ node: { slug } }) => ({ params: { slug } })),
+//     paths: posts.edges.map(({ node: { slug } }) => ({ params: { slug } })),
 //     fallback: true,
 //   };
 // }

@@ -5,7 +5,7 @@ const Layout = ({ children }) => {
   return (
     <React.Fragment>
       <Header />
-      {children}
+      <div className="mt-20 lg:mt-24">{children}</div>
     </React.Fragment>
   );
 };

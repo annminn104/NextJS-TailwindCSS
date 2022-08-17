@@ -8,6 +8,7 @@ export const getPosts = async () => {
       postsConnection {
         edges {
           node {
+            id
             author {
               bio
               id
@@ -29,11 +30,21 @@ export const getPosts = async () => {
             }
           }
         }
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          pageSize
+          startCursor
+        }
+        aggregate {
+          count
+        }
       }
     }
   `;
   const results = await request(graphqlAPI, query);
-  return results.postsConnection.edges;
+  return results.postsConnection;
 };
 
 export const getCategories = async () => {
@@ -178,4 +189,49 @@ export const getFeaturedPosts = async (slug) => {
   `;
   const result = await request(graphqlAPI, query);
   return result.posts;
+};
+
+export const getPostsPagination = async (limit, offset) => {
+  const query = gql`
+    query MyQuery($limit: Int!, $offset: Int!) {
+      postsConnection(first: $limit, skip: $offset) {
+        edges {
+          node {
+            id
+            author {
+              bio
+              id
+              name
+              photo {
+                url
+              }
+            }
+            createdAt
+            slug
+            title
+            excerpt
+            featuredImage {
+              url
+            }
+            categories {
+              name
+              slug
+            }
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          pageSize
+          startCursor
+        }
+        aggregate {
+          count
+        }
+      }
+    }
+  `;
+  const results = await request(graphqlAPI, query, { limit, offset });
+  return results.postsConnection;
 };
