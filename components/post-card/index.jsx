@@ -7,8 +7,8 @@ const PostCard = ({ post }) => {
   return (
     <React.Fragment>
       <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-8 lg:pb-12 mb-8">
-        <div className="relative overflow-hidden shadow-md pb-80 mb-6">
-          <Image src={post.featuredImage.url} layout="fill" alt="" className="object-top absolute h-80 w-full object-contains  shadow-lg rounded-t-lg lg:rounded-lg" />
+        <div className="relative overflow-hidden shadow-md pb-96 mb-8">
+          <Image src={post.featuredImage.url} layout="fill" alt="" className="object-top absolute h-80 w-full object-contains shadow-lg rounded-t-lg lg:rounded-lg" />
         </div>
         <h1 className="transition duration-700 text-center mb-4 lg:mb-8 cursor-pointer text-am-mcolor hover:text-pink-600 text-3xl font-semibold">
           <Link href={`/post/${encodeURIComponent(post.slug)}`}>{post.title}</Link>

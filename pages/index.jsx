@@ -48,7 +48,7 @@ export default function Home({ data }) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   const data = await getPosts(limit, 0);
   return {
     props: {

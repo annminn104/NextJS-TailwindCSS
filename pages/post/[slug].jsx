@@ -14,6 +14,7 @@ import { getPostDetails } from "../../services/graphql.service";
 import { initFacebookSDK } from "../../services/facebookSDK.service";
 
 const PostDetails = ({ post }) => {
+  console.log(post);
   const router = useRouter();
 
   useEffect(() => {

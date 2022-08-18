@@ -12,16 +12,13 @@ import InfiniteScroll from "react-infinite-scroll-component";
 const limit = 1;
 
 const CategoryPost = ({ slug, data }) => {
-  console.log(data);
-  const [categoryPost, setCategoryPost] = useState(data);
+  const [categoryPost, setCategoryPost] = useState(data.edges);
   const [hasMore, setHasMore] = useState(true);
   const router = useRouter();
 
   const getMorePosts = async () => {
     const newDataCategoryPost = await getCategoryPost(slug, limit, categoryPost.length);
-
-    // setCategoryPost((categoryPost) => [...categoryPost, ...newDataCategoryPost]);
-    console.log(categoryPost);
+    setCategoryPost((categoryPost) => [...categoryPost, ...newDataCategoryPost.edges]);
   };
 
   useEffect(() => {
@@ -36,17 +33,14 @@ const CategoryPost = ({ slug, data }) => {
   return (
     <React.Fragment>
       <NextSeo title={"Caterory"} />
-      <div className="container mx-auto px-10 mb-8">
+      <div className="container mx-auto px-4 lg:px-10 mb-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-8">
           <div className="col-span-1 lg:col-span-8">
-            {/* {posts.map((post, index) => (
-              <PostCard key={index} post={post.node} />
-            ))} */}
-            {/* <InfiniteScroll dataLength={categoryPost.length} next={getMorePosts} hasMore={hasMore} loader={<h4>Loading...</h4>}>
+            <InfiniteScroll dataLength={categoryPost.length} next={getMorePosts} hasMore={hasMore} loader={<h4>Loading...</h4>}>
               {categoryPost.map((post, index) => (
                 <PostCard post={post.node} key={index} />
               ))}
-            </InfiniteScroll> */}
+            </InfiniteScroll>
           </div>
           <div className="col-span-1 lg:col-span-4">
             <div className="relative lg:sticky lg:top-24">
